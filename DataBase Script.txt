@@ -1,0 +1,8 @@
+create table SmsOtpDetail(
+UserId int identity(1, 1),
+MobileNumber varchar(20),
+Otp varchar(10),
+OtpCount int,
+InsertionDate varchar(50) default getdate(),
+UpdateDate varchar(50) default null
+);

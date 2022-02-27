@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlQueries>
+	<OTpVarification>
+		<![CDATA[
+			SELECT UserId 
+			FROM SendSmsOtpDB.dbo.EmailOtpDetail
+			WHERE EmailID=@EmailID AND Otp=@Otp
+		]]>
+	</OTpVarification>
+	<GetEmailOtpDetail>
+		<![CDATA[
+		SELECT	UserId,
+				EmailID,
+				OtpCount,
+				InsertionDate,
+				UpdateDate,
+				(select COUNT(*) from [SendSmsOtpDB].[dbo].[EmailOtpDetail]) as TotalRecord
+		FROM [SendSmsOtpDB].[dbo].[EmailOtpDetail]
+		ORDER BY UpdateDate DESC , InsertionDate DESC
+		OFFSET @Limit ROWS
+		FETCH NEXT @RecordPerPage ROWS ONLY;
+		]]>
+	</GetEmailOtpDetail>
+</SqlQueries>
